@@ -33,19 +33,19 @@ options.SCALE_NAMES = {}
 local RANGES = { "1d", "1m", "3m", "1y" }
 local RANGE_NAMES = { "1 day", "1 month", "3 months", "1 year" }
 
-local function read_env_file()
-  local file = io.open(".env", "r")
+local function read_api_key()
+  local file = io.open("api.key", "r")
   if file then
     local content = file:read("*all")
     file:close()
-    return string.match(content, "ALPHA_VANTAGE_API_KEY=([^\n]+)")
+    return content:match("^%s*(.-)%s*$") -- trim whitespace
   end
   return nil
 end
 
-local API_TOKEN = read_env_file()
+local API_TOKEN = read_api_key()
 if not API_TOKEN then
-  print("Warning: Please set ALPHA_VANTAGE_API_KEY in your .env file")
+  print("Warning: Please set your API key in api.key file")
   API_TOKEN = "demo" -- fallback to demo mode
 end
 

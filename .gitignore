@@ -1,1 +1,4 @@
- .env
+api.key
+test.json
+__pycache__/
+*.pyc

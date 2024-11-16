@@ -1,7 +1,5 @@
 # The Arp Index - To the Moon
-Check stocks on norns (and make music).
-
-A script that turns stock market data into musical sequences. Watch the market move while creating generative arpeggios.
+Turn stock market data into musical sequences. Watch the market move while creating generative arpeggios with Molly the Poly.
 
 ## Installation
 
@@ -28,9 +26,10 @@ A script that turns stock market data into musical sequences. Watch the market m
    - Sign up for your key
    - Copy your API key
 
-2. Create a .env file in the script directory:
-   - Add this line, replacing YOUR_KEY with your actual API key:
-     `ALPHA_VANTAGE_API_KEY=YOUR_KEY`
+2. Create your API key file:
+   - Copy api.key.sample to api.key
+   - Replace the contents with your API key
+   - Make sure there are no extra spaces or newlines
 
 ## Controls
 - E1 : Select company
