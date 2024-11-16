@@ -3,9 +3,21 @@ Check stocks on norns (and make music).
 
 A script that turns stock market data into musical sequences. Watch the market move while creating generative arpeggios.
 
+## Installation
+
+1. Install Molly the Poly engine in maiden:
+   ```
+   ;install https://github.com/markwheeler/molly_the_poly/archive/master.zip
+   ```
+
+2. Install The Arp Index:
+   ```
+   ;install https://github.com/seajaysec/arp_index/archive/master.zip
+   ```
+
 ## Requirements
 - norns
-- molly_the_poly engine (install from maiden)
+- molly_the_poly engine (installed above)
 - internet connection
 - Alpha Vantage API key (free)
 
