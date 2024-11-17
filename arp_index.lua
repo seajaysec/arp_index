@@ -33,7 +33,7 @@ options.SCALE_NAMES = {}
 local RANGES = { "1d", "1m", "3m", "1y" }
 local RANGE_NAMES = { "1 day", "1 month", "3 months", "1 year" }
 
-local API_TOKEN = "your api key" -- Alpha Vantage API key
+local API_TOKEN = "your api key here" -- Alpha Vantage API key
 local API_BASE_URL = "https://www.alphavantage.co/query"
 
 local SCREEN_FRAMERATE = 15

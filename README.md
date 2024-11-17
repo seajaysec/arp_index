@@ -17,6 +17,9 @@ Turn stock market data into musical sequences. Watch the market move while creat
 - norns
 - molly_the_poly engine (installed above)
 - internet connection
+- Alpha Vantage API key (included)
+
+Note: This script uses a shared API key with rate limits. If you hit the limits, you can get your own free key at www.alphavantage.co
 
 ## Controls
 - E1 : Select company
