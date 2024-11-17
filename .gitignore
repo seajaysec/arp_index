@@ -2,4 +2,5 @@ api.key
 test.json
 __pycache__/
 *.pyc
-test.json
+.vscode
+test_stock_api.py
