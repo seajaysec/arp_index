@@ -128,29 +128,46 @@ end
 
 local function process_companies_json(json)
   companies = {}
+
+  -- Debug: Print raw response
+  print("Raw JSON response:", string.sub(json or "", 1, 200))
+
   -- Parse the JSON response - combine gainers, losers and most active
-  local function parse_stock_list(list_json, list_name)
+  local function parse_stock_list(list_json)
     if list_json then
+      print("Parsing list:", string.sub(list_json, 1, 100)) -- Debug
       for entry in string.gmatch(list_json, "{(.-)}") do
-        table.insert(companies, {
-          symbol = string.match(entry, "\"ticker\":\"(.-)\""),
-          name = string.match(entry, "\"price\":\"(.-)\""), -- Using price as name for now
-          data = {},
-          preset = {},
-          price_change = tonumber(string.match(entry, "\"change_amount\":\"(.-)\""))
-        })
+        local symbol = string.match(entry, "\"ticker\":\"([^\"]+)\"")
+        local price = string.match(entry, "\"price\":\"([^\"]+)\"")
+        local change = string.match(entry, "\"change_amount\":\"([^\"]+)\"")
+
+        print("Found stock:", symbol, price, change) -- Debug
+
+        if symbol and price and change then
+          table.insert(companies, {
+            symbol = symbol,
+            name = price, -- Using price as name temporarily
+            data = {},
+            preset = {},
+            price_change = tonumber(change)
+          })
+        end
       end
     end
   end
 
-  -- Parse each list
-  local gainers = string.match(json, "\"top_gainers\":%[(.-)%]")
-  local losers = string.match(json, "\"top_losers\":%[(.-)%]")
-  local most_active = string.match(json, "\"most_actively_traded\":%[(.-)%]")
+  -- Parse each list with more precise pattern matching
+  local most_active = string.match(json, "\"most_actively_traded\":%s*%[(.-)%]")
+  print("Found most active section:", most_active and "yes" or "no") -- Debug
 
-  parse_stock_list(gainers, "top_gainers")
-  parse_stock_list(losers, "top_losers")
-  parse_stock_list(most_active, "most_actively_traded")
+  if most_active then
+    parse_stock_list(most_active)
+  else
+    -- Try simpler pattern if the first one fails
+    most_active = string.match(json, "most_actively_traded\":%[(.-)%]")
+    print("Found most active with simpler pattern:", most_active and "yes" or "no") -- Debug
+    parse_stock_list(most_active)
+  end
 
   table.sort(companies, function(k1, k2) return k1.symbol < k2.symbol end)
 
