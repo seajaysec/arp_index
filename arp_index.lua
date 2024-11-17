@@ -1,6 +1,6 @@
 -- The Arp Index
--- 1.0.1 @markeats
--- llllllll.co/t/the-arp-index
+-- 1.1 @seajaysec
+-- Based on work by @markeats
 --
 -- Check the stock market.
 -- Requires internet.
@@ -13,7 +13,7 @@
 -- K3 : Refresh
 --
 -- Data provided by
--- http://iexcloud.io
+-- Alpha Vantage
 --
 
 local ControlSpec = require "controlspec"
@@ -33,22 +33,7 @@ options.SCALE_NAMES = {}
 local RANGES = { "1d", "1m", "3m", "1y" }
 local RANGE_NAMES = { "1 day", "1 month", "3 months", "1 year" }
 
-local function read_api_key()
-  local file = io.open("api.key", "r")
-  if file then
-    local content = file:read("*all")
-    file:close()
-    return content:match("^%s*(.-)%s*$") -- trim whitespace
-  end
-  return nil
-end
-
-local API_TOKEN = read_api_key()
-if not API_TOKEN then
-  print("Warning: Please set your API key in api.key file")
-  API_TOKEN = "demo" -- fallback to demo mode
-end
-
+local API_TOKEN = "your api key" -- Alpha Vantage API key
 local API_BASE_URL = "https://www.alphavantage.co/query"
 
 local SCREEN_FRAMERATE = 15
@@ -761,3 +746,5 @@ function redraw()
 
   screen.update()
 end
+
+print("API key loaded:", API_TOKEN and #API_TOKEN > 0 and "yes" or "no")

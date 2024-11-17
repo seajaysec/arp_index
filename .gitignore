@@ -2,3 +2,4 @@ api.key
 test.json
 __pycache__/
 *.pyc
+test.json
